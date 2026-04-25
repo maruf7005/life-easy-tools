@@ -1,0 +1,215 @@
+/* # পুরো পেজের সেটআপ */
+body { 
+    margin: 0; 
+    background: black; 
+    color: white; 
+    font-family: 'Segoe UI', sans-serif; 
+    overflow-x: hidden; 
+}
+
+/* # হেডার ডিজাইন - লাল গ্লো */
+header { 
+    text-align: center; 
+    padding: 20px; 
+    color: red; 
+    font-size: 28px; 
+    font-weight: bold; 
+    text-shadow: 0 0 15px red; 
+    border-bottom: 2px solid red; 
+}
+
+/* # টপবার স্ক্রলিং এরিয়া */
+.topbar { 
+    margin: 20px auto; 
+    width: 90%; 
+    max-width: 600px; 
+    padding: 12px 0; 
+    border: 2px solid cyan; 
+    border-radius: 15px; 
+    box-shadow: 0 0 10px cyan; 
+    overflow: hidden; 
+    position: relative; 
+    box-sizing: border-box; 
+}
+
+.scrolling-text { 
+    display: inline-block; 
+    white-space: nowrap; 
+    color: lime; 
+    font-weight: bold; 
+    padding-left: 100%; 
+    animation: marquee 15s linear infinite; 
+}
+
+@keyframes marquee { 
+    0% { transform: translateX(0); } 
+    100% { transform: translateX(-100%); } 
+}
+
+/* ############################################################ */
+/* # এই অংশটুকু আপনার ছবি অনুযায়ী Full Width করা হয়েছে # */
+/* ############################################################ */
+
+.menu { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 15px; 
+    padding: 20px 0; 
+    width: 100%;             /* # পুরো স্ক্রিন জুড়ে থাকবে */
+    box-sizing: border-box;
+    
+    /* দুই পাশে আপনার চাওয়া সেই লম্বা ম্যাজেন্টা বর্ডার */
+    border-left: 4px solid magenta;   
+    border-right: 4px solid magenta; 
+    
+    /* বর্ডারে হালকা গ্লো ইফেক্ট */
+    box-shadow: inset 10px 0 15px -10px magenta, inset -10px 0 15px -10px magenta;
+}
+
+.menu button { 
+    width: 96%;              /* # বাটনগুলো এখন স্ক্রিনের এক মাথা থেকে অন্য মাথা পর্যন্ত চওড়া */
+    max-width: none;         /* # ৪০০ পিক্সেলের সীমাবদ্ধতা তুলে দেওয়া হয়েছে */
+    padding: 15px; 
+    background: #0b0b0b; 
+    color: white; 
+    border: 2px solid magenta; 
+    border-radius: 8px;      /* # ছবির মতো হালকা রাউন্ড শেপ */
+    cursor: pointer; 
+    transition: 0.3s; 
+    box-shadow: 0 0 8px magenta; 
+    font-size: 16px; 
+    font-weight: bold; 
+    text-align: center; 
+}
+
+.menu button:hover { 
+    transform: scale(1.01); 
+    box-shadow: 0 0 20px magenta; 
+    background: #151515;
+}
+
+/* ############################################################ */
+
+/* # পপ-আপ টুল বক্স বা কার্ড ডিজাইন */
+.modal-overlay { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0, 0, 0, 0.9); 
+    backdrop-filter: blur(8px); 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    z-index: 1000; 
+}
+
+.card { 
+    background: #050505; 
+    width: 85%; 
+    max-width: 380px; 
+    padding: 25px; 
+    border: 3px solid cyan; 
+    border-radius: 25px; 
+    box-shadow: 0 0 30px cyan; 
+    text-align: center; 
+    position: relative; 
+    animation: zoom 0.3s ease-out; 
+}
+
+@keyframes zoom { 
+    from { transform: scale(0.5); } 
+    to { transform: scale(1); } 
+}
+
+.inner-container { 
+    border: 1.5px dashed rgba(0, 255, 255, 0.4); 
+    padding: 15px; 
+    border-radius: 15px; 
+    margin-bottom: 15px; 
+}
+
+input, textarea { 
+    width: 100%; 
+    padding: 12px; 
+    margin: 10px 0; 
+    background: #111; 
+    color: cyan; 
+    border-radius: 8px; 
+    border: 1px solid #333; 
+    outline: none; 
+    box-sizing: border-box; 
+    text-align: center; 
+}
+
+.btn-main { 
+    padding: 12px 25px; 
+    background: black; 
+    color: white; 
+    border: 2px solid magenta; 
+    border-radius: 10px; 
+    box-shadow: 0 0 10px magenta; 
+    cursor: pointer; 
+    font-weight: bold; 
+}
+
+/* # ফুটার ক্রেডিট বা ব্র্যান্ডিং */
+.footer-credit { 
+    margin-top: 25px; 
+    padding-top: 15px; 
+    border-top: 1px solid rgba(0, 255, 255, 0.2); 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 5px; 
+    font-size: 14px; 
+    color: #888; 
+}
+
+.dev-badge { 
+    background: cyan; 
+    color: black; 
+    padding: 2px 10px; 
+    border-radius: 5px; 
+    font-weight: bold; 
+    box-shadow: 0 0 10px cyan; 
+}
+
+.secure-msg { 
+    margin-top: 10px; 
+    font-size: 10px; 
+    color: #444; 
+    letter-spacing: 1px; 
+    text-transform: uppercase; 
+}
+
+.close-btn { 
+    position: absolute; 
+    bottom: -70px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    color: white; 
+    font-size: 45px; 
+    cursor: pointer; 
+    background: none; 
+    border: none; 
+}
+
+.speed-frame { 
+    width: 100%; 
+    height: 250px; 
+    border: 1px solid cyan; 
+    border-radius: 10px; 
+    background: white; 
+}
+
+canvas { display: none; }
+
+img { 
+    max-width: 100%; 
+    border-radius: 10px; 
+    margin-top: 10px; 
+    border: 1px solid cyan; 
+}
