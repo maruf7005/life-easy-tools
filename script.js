@@ -1,118 +1,139 @@
 function openTool(name) {
     let box = document.getElementById("toolBox");
-    let content = "";
+    let title = "", ui = "";
+    if (name == "qr") {
+        title = "QR Generator";
+        ui = `<input id="qrtext" placeholder="Text or URL...">
+              <button class="btn-main" onclick="qrgen()">Generate QR</button>
+              <div id="qrArea" style="display:none; margin-top:10px;">
+                   <img id="qrimg" style="width:150px; border: 2px solid cyan; border-radius:10px;">
+                   <br><button class="btn-main" style="border-color:lime; color:lime;" onclick="downloadQR()">📥 Download QR</button>
+              </div>`;
+    } else if (name == "age") {
+        title = "Age Calculator";
+        ui = `<input type="date" id="dob">
+              <button class="btn-main" onclick="calcAge()">🚀 Calculate Age</button>
+              <div id="ageRes" style="color:lime; font-size:18px; margin-top:15px; font-weight:bold; line-height:1.5;"></div>`;
+    } else if (name == "tiktok") {
+        title = "TikTok Downloader";
+        ui = `<input id="tkUrl" placeholder="লিঙ্ক দিন..."><button class="btn-main" onclick="tkDown()">🚀 Get Video</button><div id="tkRes"></div>`;
+    } else if (name == "insta") {
+        title = "Instagram Downloader";
+        ui = `<input id="igUrl" placeholder="লিঙ্ক দিন..."><button class="btn-main" onclick="igDown()">🚀 Get Media</button><div id="igRes"></div>`;
+    } else if (name == "yt") {
+        title = "YouTube Thumbnail";
+        ui = `<input id="ytUrl" placeholder="লিঙ্ক দিন..."><button class="btn-main" onclick="getYt()">🚀 Get Image</button><div id="ytRes" style="display:none; margin-top:10px;"><img id="thumbImg" style="width:100%; border-radius:10px; border:1px solid cyan;"><br><a id="thumbDl" target="_blank"><button class="btn-main">📥 Download</button></a></div>`;
+    } else if (name == "tts") {
+        title = "Text to Speech";
+        ui = `<div class="inner-container"><textarea id="ttsText" placeholder="এখানে লিখুন..."></textarea></div><button class="btn-main" onclick="speakText()">🔊 Speak Now</button>`;
+    } else if (name == "t2e") {
+        title = "Stylish Name Maker";
+        ui = `<input id="styleInput" placeholder="নাম লিখুন..." oninput="genStyles()"><div id="styleRes" style="margin-top:10px; max-height:150px; overflow-y:auto;"></div>`;
+    } else if (name == "repeater") {
+        title = "Text Repeater";
+        ui = `<textarea id="repText" placeholder="লেখাটি লিখুন..."></textarea><input type="number" id="repNum" placeholder="কতবার?"><button class="btn-main" onclick="genRepeat()">🚀 Generate</button><textarea id="repRes" style="margin-top:10px; height:100px; display:none;" readonly></textarea><button class="btn-main" id="copyRepBtn" style="display:none; border-color:lime; color:lime;" onclick="copyRep()">📋 Copy All</button>`;
+    } else if (name == "speed") {
+        title = "Internet Speed";
+        ui = `<iframe src="https://fast.com" style="width:100%; height:300px; border:1px solid cyan; border-radius:10px;"></iframe>`;
+    } else if (name == "feedback") {
+        title = "Report a Problem";
+        ui = `<textarea id="feedText" placeholder="সমস্যাটি লিখুন..."></textarea><button class="btn-main" style="border-color:lime; color:lime;" onclick="alert('Sent to MRF!')">Submit Report</button>`;
+    }
 
-    if (name == "tts") {
-        content = `<h2>Text to Speech</h2><div class="inner-container"><textarea id="ttsText" placeholder="এখানে কিছু লিখুন..."></textarea></div><button class="btn-main" onclick="speakText()">🔊 Speak Now</button>`;
-    }
-    else if (name == "age") {
-        content = `<h2>Age Calculator</h2><div class="inner-container"><input type="date" id="dob"></div><button class="btn-main" onclick="calcAge()">🚀 Calculate</button><div id="ageRes" style="margin-top:10px; color:lime;"></div>`;
-    }
-    else if (name == "speed") {
-        content = `<h2>Speed Test</h2><div class="inner-container"><iframe src="https://fast.com" class="speed-frame"></iframe></div>`;
-    }
-    else if (name == "tiktok") {
-        content = `<h2>TikTok Saver</h2><div class="inner-container"><input id="tkUrl" placeholder="Paste Link"></div><button class="btn-main" onclick="tkDown()">🚀 Download</button><div id="tkRes"></div>`;
-    }
-    else if (name == "insta") {
-        content = `<h2>Insta Saver</h2><div class="inner-container"><input id="insUrl" placeholder="Paste Link"></div><button class="btn-main" onclick="insDown()">🚀 Get Media</button><div id="insRes"></div>`;
-    }
-    else if (name == "compress") {
-        content = `<h2>Compressor</h2><div class="inner-container"><input type="file" id="imgUp" accept="image/*"></div><button class="btn-main" onclick="compressImg()">🚀 Compress</button><div id="compRes"></div><canvas id="canvas"></canvas>`;
-    }
-    else if (name == "qr") {
-        content = `<h2>QR Generator</h2><div class="inner-container"><input id="qrtext" placeholder="Text or URL"></div><button class="btn-main" onclick="qrgen()">Generate</button><br><img id="qrimg">`;
-    }
-    else if (name == "thumb") {
-        content = `<h2>YT Thumbnail</h2><div class="inner-container"><input id="yturl" placeholder="YouTube Link"></div><button class="btn-main" onclick="ytThumb()">Get Image</button><br><img id="ytimg" style="display:none;">`;
-    }
-    else {
-        content = `<h2>Feedback</h2><div class="inner-container"><textarea placeholder="Report problem..."></textarea></div><button class="btn-main" onclick="alert('Sent!')">Submit</button>`;
-    }
-
-    box.innerHTML = `
-        <div class="modal-overlay">
-            <div class="card">
-                ${content}
-                <div class="footer-credit">
-                    <span>Developed by</span>
-                    <span style="color:cyan; margin: 0 5px;">|</span>
-                    <span class="dev-badge">MRF</span>
-                </div>
-                <div class="secure-msg">Fast & Secure | All Rights Reserved © 2026</div>
-                <button class="close-btn" onclick="closeTool()">×</button>
-            </div>
-        </div>`;
+    box.innerHTML = `<div class="modal-overlay"><div class="card"><h2 style="margin-top:0;">${title}</h2>${ui}<div class="card-divider"></div><div style="font-size:14px; color:#888;">Developed by | <span class="mrf-badge">MRF</span><div style="font-size:10px; margin-top:5px;">ALL RIGHTS RESERVED © 2026</div></div><button class="close-btn" onclick="closeTool()">×</button></div></div>`;
 }
 
 function closeTool() { document.getElementById("toolBox").innerHTML = ""; }
 
-// Tool Logic Functions
-function speakText() {
-    let t = document.getElementById("ttsText").value;
-    if(!t) return alert("Write something!");
-    let s = new SpeechSynthesisUtterance(t);
-    window.speechSynthesis.speak(s);
-}
-
-function calcAge() {
-    let d = document.getElementById("dob").value;
-    if(!d) return alert("Select Date!");
-    let y = new Date().getFullYear() - new Date(d).getFullYear();
-    document.getElementById("ageRes").innerHTML = "Your Age: " + y + " Years";
-}
-
-async function tkDown() {
-    let u = document.getElementById("tkUrl").value;
-    let r = document.getElementById("tkRes");
-    if(!u) return alert("Link!");
-    r.innerHTML = "Processing...";
-    try {
-        const res = await fetch(`https://www.tikwm.com/api/?url=${encodeURIComponent(u)}`);
-        const data = await res.json();
-        r.innerHTML = `<a href="${data.data.play}" target="_blank"><button class="btn-main">📥 Download</button></a>`;
-    } catch(e) { r.innerHTML = "Error!"; }
-}
-
-async function insDown() {
-    let u = document.getElementById("insUrl").value;
-    let r = document.getElementById("insRes");
-    if(!u) return alert("Link!");
-    r.innerHTML = "Fetching...";
-    try {
-        const res = await fetch(`https://api.vkrdown.com/insta/render.php?url=${encodeURIComponent(u)}`);
-        const data = await res.json();
-        r.innerHTML = `<a href="${data.url}" target="_blank"><button class="btn-main">📥 Download</button></a>`;
-    } catch(e) { r.innerHTML = "Error!"; }
-}
-
-function compressImg() {
-    let f = document.getElementById("imgUp").files[0];
-    if(!f) return alert("Select file!");
-    let rd = new FileReader();
-    rd.readAsDataURL(f);
-    rd.onload = function(e) {
-        let img = new Image();
-        img.src = e.target.result;
-        img.onload = function() {
-            let cv = document.getElementById("canvas");
-            let ctx = cv.getContext("2d");
-            cv.width = img.width / 2; cv.height = img.height / 2;
-            ctx.drawImage(img, 0, 0, cv.width, cv.height);
-            document.getElementById("compRes").innerHTML = `<a href="${cv.toDataURL("image/jpeg", 0.6)}" download="mrf_compressed.jpg"><button class="btn-main">📥 Download</button></a>`;
-        }
-    }
-}
-
+// --- ১. QR Generator & Downloader (FIXED) ---
 function qrgen() {
     let t = document.getElementById("qrtext").value;
-    document.getElementById("qrimg").src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(t)}`;
+    if(!t) return alert("কিছু লিখুন!");
+    let qUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(t)}`;
+    let img = document.getElementById("qrimg");
+    img.src = qUrl;
+    document.getElementById("qrArea").style.display = "block";
 }
 
-function ytThumb() {
-    let u = document.getElementById("yturl").value;
-    let id = u.includes("v=") ? u.split("v=")[1].split("&")[0] : u.split("youtu.be/")[1];
-    let i = document.getElementById("ytimg");
-    i.src = `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
-    i.style.display = "inline-block";
+async function downloadQR() {
+    let img = document.getElementById("qrimg");
+    const response = await fetch(img.src);
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'MRF-QR-Code.png';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
 }
+
+// --- ২. Age Calculator (Detailed) ---
+function calcAge() {
+    let dobValue = document.getElementById("dob").value;
+    if(!dobValue) return alert("জন্ম তারিখ দিন!");
+    let dob = new Date(dobValue);
+    let now = new Date();
+    
+    let years = now.getFullYear() - dob.getFullYear();
+    let months = now.getMonth() - dob.getMonth();
+    let days = now.getDate() - dob.getDate();
+
+    if (days < 0) {
+        months--;
+        days += new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+    }
+    if (months < 0) {
+        years--;
+        months += 12;
+    }
+    document.getElementById("ageRes").innerHTML = `${years} Years, ${months} Months, ${days} Days`;
+}
+
+// --- অন্য সব টুলস (TikTok, Insta, YT, TTS, Repeater) আগের মতো থাকবে ---
+function genRepeat() {
+    let t = document.getElementById("repText").value, n = document.getElementById("repNum").value;
+    if(!t || !n) return alert("সব তথ্য দিন!");
+    let res = ""; for(let i=0; i<n; i++) res += t + "\n";
+    let box = document.getElementById("repRes"); box.value = res; box.style.display = "block";
+    document.getElementById("copyRepBtn").style.display = "inline-block";
+}
+function copyRep() { let c = document.getElementById("repRes"); c.select(); document.execCommand("copy"); alert("Copied!"); }
+
+async function tkDown() {
+    let u = document.getElementById("tkUrl").value, r = document.getElementById("tkRes");
+    if(!u) return alert("লিঙ্ক দিন!");
+    r.innerHTML = "Searching...";
+    try {
+        const res = await fetch(`https://www.tikwm.com/api/?url=${u}`); const d = await res.json();
+        r.innerHTML = `<video src="${d.data.play}" style="width:100%; border-radius:10px;" controls></video><br><a href="${d.data.play}" target="_blank"><button class="btn-main">📥 Download</button></a>`;
+    } catch(e) { r.innerHTML = "Error!"; }
+}
+
+async function igDown() {
+    let u = document.getElementById("igUrl").value, r = document.getElementById("igRes");
+    if(!u) return alert("লিঙ্ক দিন!");
+    r.innerHTML = "Searching...";
+    try {
+        const res = await fetch(`https://api.vkrtools.com/api/insta?url=${u}`); const d = await res.json();
+        r.innerHTML = `<a href="${d.data[0].url}" target="_blank"><button class="btn-main" style="color:lime; border-color:lime;">📥 Download Now</button></a>`;
+    } catch(e) { r.innerHTML = "Error!"; }
+}
+
+function genStyles() {
+    const text = document.getElementById("styleInput").value; const res = document.getElementById("styleRes");
+    if(!text) { res.innerHTML = ""; return; }
+    const styles = [`꧁༺${text}༻꧂`, `亗 ${text} 亗`, `乂${text}乂`, `☠︎${text}︎☠︎`, `⚡${text}⚡` ];
+    let html = '<div style="background:#111; padding:10px; border-radius:10px; text-align:left;">';
+    styles.forEach(s => { html += `<div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #222;"><span style="color:cyan;">${s}</span><button style="background:none; border:1px solid lime; color:lime; border-radius:5px; cursor:pointer;" onclick="navigator.clipboard.writeText('${s}'); alert('Copied!')">Copy</button></div>`; });
+    res.innerHTML = html + '</div>';
+}
+
+function getYt() {
+    let url = document.getElementById("ytUrl").value, vId = url.split("v=")[1]?.substring(0, 11) || url.split("/").pop().substring(0, 11);
+    document.getElementById("thumbImg").src = `https://img.youtube.com/vi/${vId}/hqdefault.jpg`;
+    document.getElementById("thumbDl").href = `https://img.youtube.com/vi/${vId}/maxresdefault.jpg`;
+    document.getElementById("ytRes").style.display = "block";
+}
+
+function speakText() { let t = document.getElementById("ttsText").value; window.speechSynthesis.speak(new SpeechSynthesisUtterance(t)); }

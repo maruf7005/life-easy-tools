@@ -1,35 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIFE EASY TOOLS | Developed by MRF</title>
+    <title>LIFE EASY TOOLS - MRF</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <header>LIFE EASY TOOLS</header>
-
     <div class="topbar">
-        <div class="scrolling-text">
-            Welcome To LIFE EASY TOOLS | All-in-One Utility Platform | Developed by MRF
-        </div>
+        <div class="scrolling-text">Welcome to Life Easy Tools! Developed by MRF. Enjoy premium tools for free! 🚀</div>
     </div>
-
-    <div class="menu" id="toolMenu">
-        <button onclick="openTool('tiktok')">TikTok Downloader</button>
+    <div class="menu">
+        <button onclick="openTool('tiktok')">TikTok Video Downloader</button>
         <button onclick="openTool('insta')">Instagram Downloader</button>
-        <button onclick="openTool('tts')">Text to Speech 🎤</button>
+        <button onclick="openTool('yt')">YouTube Thumbnail Downloader</button>
+        <button onclick="openTool('tts')">Text to Speech (Voice)</button>
+        <button onclick="openTool('t2e')">Stylish Name Maker</button>
+        <button onclick="openTool('repeater')">Text Repeater (10-1000x)</button>
         <button onclick="openTool('age')">Age Calculator</button>
+        <button onclick="openTool('qr')">QR Code Generator</button>
         <button onclick="openTool('speed')">Internet Speed Test</button>
-        <button onclick="openTool('compress')">Image Compressor</button>
-        <button onclick="openTool('qr')">QR Generator</button>
-        <button onclick="openTool('thumb')">YouTube Thumbnail</button>
-        <button onclick="openTool('feedback')" style="border-color: lime; color: lime;">Report Problem</button>
+        <button class="report-btn-menu" onclick="openTool('feedback')">Report Problem</button>
     </div>
-
     <div id="toolBox"></div>
-
     <script src="script.js"></script>
 </body>
 </html>
